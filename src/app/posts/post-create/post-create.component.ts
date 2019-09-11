@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Post} from '../post.model';
 @Component({
     selector: 'app-post-create',
     templateUrl: './post-create.component.html',
@@ -8,16 +8,23 @@ import {Component} from '@angular/core';
 })
 export class PostCreateComponent {
     newPost = 'No Content';
-    enteredValue = '';
+    // enteredValue = '';
+        enteredContent = '';
+        enteredTitle = '';
+        @Output() postCreated = new EventEmitter<Post>();
     // constructor(parameters) {
-        
     // }
-    onAddPost(){
+    onAddPost() {
         // alert('Post Added!');
         // console.log(postInput);
         // console.dir(postInput);
-
+ 
         // this.newPost = 'The user\'s post';
-        this.newPost = this.enteredValue;
+        // this.newPost = this.enteredValue;
+        const post: Post = {
+            title: this.enteredTitle,
+            content: this.enteredContent
+        };
+        this.postCreated.emit(post);
     }
-};
+}
